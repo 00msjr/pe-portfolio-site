@@ -50,3 +50,13 @@ def hobbies():
 @app.route("/About")
 def about():
     return render_template("about.html", title="About")
+
+
+@app.route("/map")
+def map():
+    places = [
+        {"name": "Tokyo", "lat": 35.6895, "lon": 139.6917, "date": "Jan 2023"},
+        {"name": "Paris", "lat": 48.8566, "lon": 2.3522, "date": "May 2022"},
+        {"name": "New York", "lat": 40.7128, "lon": -74.0060, "date": "Aug 2021"},
+    ]
+    return render_template("map.html", places=places)
