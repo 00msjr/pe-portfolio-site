@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Map{% endblock %}
+
+{% block content %}
+<div id="map" style="height: 600px; width: 100%;"></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    //initialize map
+    var map = L.map('map').setView([20, 0], 2);
+
+    //Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    //your visited places
+    var places = {{ places | tojson }};
+
+    //add markers in init.py
+    places.forEach(function(place) {
+        L.marker([place.lat, place.lon])
+            .addTo(map)
+            .bindPopup(`<b>${place.name}</b><br>${place.date}`);
+    });
+</script>
+{% endblock %}
