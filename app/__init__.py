@@ -18,19 +18,19 @@ def about():
         title="About Me",
         work_experiences=[
             {
-                "position": "Developer",
-                "company": "ABC Inc",
-                "years": "2021–2023",
-                "description": "Built web apps",
+                "position": "Developer Intern",
+                "company": "Direct Agents",
+                "years": "February 2025-May 2025",
+                "description": "Streamlined workflows",
             },
             {
-                "position": "Intern",
-                "company": "XYZ Labs",
-                "years": "2020",
-                "description": "Helped with testing",
+                "position": "Data Analytics Intern",
+                "company": "NYC Department of Investigation",
+                "years": "February 2023-May 2023",
+                "description": "Analyzed data",
             },
         ],
-        education=[{"school": "Uni A", "degree": "B.Sc. in CS", "years": "2017–2021"}],
+        education=[ {"school": "New York University", "degree": "MS in Computing", "years": "Expected Graduation December 2025"},{"school": "New York University", "degree": "BA in Computer Science", "years": "Graduated May 2024"}],
     )
 
 
@@ -40,9 +40,8 @@ def hobbies():
         "hobbies.html",
         title="Hobbies",
         hobbies=[
-            {"name": "Hiking", "image": "hiking.jpg"},
-            {"name": "Photography", "image": "photography.jpg"},
-            {"name": "Cooking", "image": "cooking.jpg"},
+            {"name": "Video Games", "image": "videogame.jpg"},
+            {"name": "Reading", "image": "reading.jpg"}
         ],
     )
 
@@ -51,8 +50,16 @@ def hobbies():
 @app.route("/map")
 def map():
     places = [
-        {"name": "Tokyo", "lat": 35.6895, "lon": 139.6917, "date": "Jan 2023"},
-        {"name": "Paris", "lat": 48.8566, "lon": 2.3522, "date": "May 2022"},
-        {"name": "New York", "lat": 40.7128, "lon": -74.0060, "date": "Aug 2021"},
+        {"name": "New York", "lat": 40.7128, "lon": -74.0060, "date": "Present"},
+        {"name": "Toronto", "lat": 43.651070, "lon": -79.347015, "date": "June 2025"},
+        {"name": "Amsterdam", "lat": 52.3676, "lon": 4.9041, "date": "May 2025"},
+        {"name": "San Francisco", "lat": 37.7749, "lon": -122.4194, "date": "July 2024"},
+        {"name": "Los Angeles", "lat": 34.0522, "lon": -118.2437, "date": "June 2024"},
+        {"name": "Cancun", "lat": 21.1619, "lon": -86.8515, "date": "July 2015"},
+        {"name": "Honolulu", "lat": 21.3069, "lon": -157.8583, "date": "June 2014"},
+        {"name": "Paris", "lat": 48.8566, "lon": 2.3522, "date": "2011"},
+        {"name": "London", "lat": 51.5074, "lon": -0.1278, "date": "2010"},
+        {"name": "Beijing", "lat": 39.9042, "lon": 116.4074, "date": "2006"}
+
     ]
     return render_template("map.html", places=places)

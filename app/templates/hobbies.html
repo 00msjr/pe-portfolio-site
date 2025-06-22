@@ -9,7 +9,7 @@
       {% for hobby in hobbies %}
         <li>
           <p>{{ hobby.name }}</p>
-          <img src="{{ url_for('static', filename='images/hobbies/' ~ hobby.image) }}"
+          <img src="{{ url_for('static', filename='img/hobbies/' ~ hobby.image) }}"
                alt="{{ hobby.name }}" width="150">
         </li>
       {% endfor %}
