@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}About{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>About Me</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-        </p>
-        <p>
-            Mauris massa. Vestibulum lacinia arcu eget nulla. 
-            Sed dignissim lacinia nunc.
-        </p>
-    </div>
+  <section>
+    <h2>About Me</h2>
+    <p>Hello! I'm an aspiring developer passionate about tech, learning, and creativity.</p>
+  </section>
+
+  <section>
+    <h2>Work Experience</h2>
+    <ul>
+      {% for job in work_experiences %}
+        <li>
+          <strong>{{ job.position }}</strong> at {{ job.company }} ({{ job.years }})<br>
+          <em>{{ job.description }}</em>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <ul>
+      {% for edu in education %}
+        <li><strong>{{ edu.degree }}</strong>, {{ edu.school }} ({{ edu.years }})</li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endblock %}
