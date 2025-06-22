@@ -11,11 +11,11 @@ def home():
     return render_template("index.html", title="Home")
 
 
-@app.route("/profile")
-def profile():
+@app.route("/about")
+def about():
     return render_template(
-        "profile.html",
-        title="My Profile",
+        "about.html",
+        title="About Me",
         work_experiences=[
             {
                 "position": "Developer",
@@ -46,10 +46,6 @@ def hobbies():
         ],
     )
 
-
-@app.route("/About")
-def about():
-    return render_template("about.html", title="About")
 
 
 @app.route("/map")

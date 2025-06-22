@@ -7,27 +7,29 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
 </head>
 <body>
-  <header class="nav-bar">
-    <div class="nav-content">
-      <a href="/">
-        <div class="nav-logo">
-          <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo">
+    <header class="nav-bar">
+        <div class="nav-wrapper">
+          <div class="nav-left">
+            <a href="{{ url_for('home') }}">
+              <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" class="nav-logo">
+            </a>
+          </div>
+          <nav class="nav-right">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('hobbies') }}">Hobbies</a></li>
+                <li><a href="{{ url_for('about') }}">About Me</a></li>
+                <li><a href="{{ url_for('map') }}">Map</a></li>
+            </ul>
+          </nav>
         </div>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="{{ url_for('home') }}">Home</a></li>
-          <li><a href="{{ url_for('profile') }}">Profile</a></li>
-          <li><a href="{{ url_for('hobbies') }}">Hobbies</a></li>
-          <li><a href="{{ url_for('about') }}">About-Me</a></li>
-          <li><a href="{{ url_for('map') }}">Map</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+</header>
 
-  <main>
+
+  <main class="page-content">
     {% block content %}{% endblock %}
   </main>
+
+
 </body>
 </html>
