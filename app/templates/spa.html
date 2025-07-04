@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Michael's Portfolio</title>
+  
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3b82f6',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-xl font-bold text-gray-900">Michael's Portfolio</h1>
+                
+                <!-- HTMX Navigation Buttons -->
+                <div class="flex space-x-4">
+                    <button class="nav-btn px-4 py-2 text-primary border-b-2 border-primary font-medium" 
+                            hx-get="/content/home" 
+                            hx-target="#main-content"
+                            hx-swap="innerHTML">
+                        Home
+                    </button>
+                    <button class="nav-btn px-4 py-2 text-gray-700 hover:text-primary font-medium" 
+                            hx-get="/content/about" 
+                            hx-target="#main-content"
+                            hx-swap="innerHTML">
+                        About
+                    </button>
+                    <button class="nav-btn px-4 py-2 text-gray-700 hover:text-primary font-medium" 
+                            hx-get="/content/hobbies" 
+                            hx-target="#main-content"
+                            hx-swap="innerHTML">
+                        Hobbies
+                    </button>
+                    <button class="nav-btn px-4 py-2 text-gray-700 hover:text-primary font-medium" 
+                            hx-get="/content/map" 
+                            hx-target="#main-content"
+                            hx-swap="innerHTML">
+                        Map
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+        <div id="main-content">
+            <!-- Home content loads here by default -->
+            <div class="text-center py-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Welcome to My Portfolio</h2>
+                <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Hello! I'm Michael. When I'm not at the keyboard you can find me at the gym, at a cafe, or at a bar with friends.
+                </p>
+                <img src="{{ url_for('static', filename='img/headshot.png') }}" 
+                     alt="Michael" 
+                     class="w-32 h-32 rounded-full mx-auto mb-8 shadow-lg object-cover">
+                
+                <!-- Quick navigation cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                         hx-get="/content/about" 
+                         hx-target="#main-content">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">About Me</h3>
+                        <p class="text-gray-600">Learn about my work experience and education</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                         hx-get="/content/hobbies" 
+                         hx-target="#main-content">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">My Hobbies</h3>
+                        <p class="text-gray-600">Discover what I enjoy in my free time</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                         hx-get="/content/map" 
+                         hx-target="#main-content">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Places I've Been</h3>
+                        <p class="text-gray-600">See the cool places I've visited</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-6xl mx-auto py-6 px-4">
+            <p class="text-center text-gray-500 text-sm">
+                © 2025 Michael's Portfolio. Built with Flask, HTMX, and TailwindCSS.
+            </p>
+        </div>
+    </footer>
+
+    <!-- HTMX event listener to update active nav button -->
+    <script>
+        document.body.addEventListener('htmx:beforeRequest', function(evt) {
+            // Remove active state from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                btn.classList.add('text-gray-700');
+            });
+            
+            // Add active state to clicked button
+            evt.detail.elt.classList.remove('text-gray-700');
+            evt.detail.elt.classList.add('text-primary', 'border-b-2', 'border-primary');
+        });
+    </script>
+</body>
+</html>
