@@ -5,12 +5,12 @@ from dotenv import load_dotenv
 load_dotenv()
 app = Flask(__name__)
 
-mydb =
-MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+mydb = MySQLDatabase(
+    os.getenv("MYSQL_DATABASE"),
     user=os.getenv("MYSQL_USER"),
     password=os.getenv("MYSQL_PASSWORD"),
     host=os.getenv("MYSQL_HOST"),
-    port=3306
+    port=3306,
 )
 
 print(mydb)
@@ -262,7 +262,7 @@ def content_map():
     for place in PLACES:
         places_html += f"""
         <div class="border border-gray-200 rounded-lg p-6 hover:border-blue-300 hover:shadow-md transition-all cursor-pointer"
-             onclick="focusOnPlace({place['lat']}, {place['lon']}, '{place['name']}')">
+             onclick="focusOnPlace({place["lat"]}, {place["lon"]}, '{place["name"]}')">
             <h4 class="text-xl font-semibold text-gray-900 mb-2">{place["name"]}</h4>
             <p class="text-blue-600 font-medium mb-1">{place["date"]}</p>
             <p class="text-sm text-gray-500">Click to view on map</p>
@@ -271,9 +271,9 @@ def content_map():
 
     # Convert places to JavaScript format
     places_js = str(PLACES).replace("'", '"')
-    
+
     # Get Google Maps API key from environment
-    google_maps_api_key = os.getenv('GOOGLE_MAPS_API_KEY', 'YOUR_API_KEY_HERE')
+    google_maps_api_key = os.getenv("GOOGLE_MAPS_API_KEY", "YOUR_API_KEY_HERE")
 
     return f"""
     <div class="max-w-6xl mx-auto">
