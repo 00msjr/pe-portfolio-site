@@ -419,6 +419,135 @@ def content_map():
     """
 
 
+@app.route("/timeline")
+def timeline():
+    """Timeline page route"""
+    return render_template("main.html")
+
+
+@app.route("/content/timeline")
+def content_timeline():
+    """HTMX endpoint for timeline content"""
+    return """
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Timeline</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Share your journey and see what others are up to!
+            </p>
+        </div>
+        
+        <!-- Timeline Post Form -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Share Your Journey</h3>
+            <form id="timeline-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" id="name" name="name" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="content" class="block text-sm font-medium text-gray-700 mb-1">Content</label>
+                    <textarea id="content" name="content" rows="4" required 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" 
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Post Timeline Entry
+                </button>
+            </form>
+        </div>
+
+        <!-- Timeline Posts -->
+        <div id="timeline-posts" class="space-y-6">
+            <!-- Posts will be loaded here -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        // Function to get Gravatar URL
+        function getGravatarUrl(email) {
+            const hash = CryptoJS.MD5(email.toLowerCase().trim()).toString();
+            return `https://www.gravatar.com/avatar/${hash}?s=50&d=identicon`;
+        }
+
+        // Function to format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString() + ' at ' + date.toLocaleTimeString();
+        }
+
+        // Function to load timeline posts
+        async function loadTimelinePosts() {
+            try {
+                const response = await fetch('/api/timeline_post');
+                const data = await response.json();
+                const postsContainer = document.getElementById('timeline-posts');
+                
+                if (data.timeline_posts && data.timeline_posts.length > 0) {
+                    postsContainer.innerHTML = data.timeline_posts.map(post => `
+                        <div class="bg-white rounded-lg shadow-sm p-6">
+                            <div class="flex items-start space-x-4">
+                                <img src="${getGravatarUrl(post.email)}" 
+                                     alt="${post.name}" 
+                                     class="w-12 h-12 rounded-full">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <h4 class="font-semibold text-gray-900">${post.name}</h4>
+                                        <span class="text-sm text-gray-500">${formatDate(post.created_at)}</span>
+                                    </div>
+                                    <p class="text-gray-700">${post.content}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    postsContainer.innerHTML = '<p class="text-center text-gray-500 py-8">No timeline posts yet. Be the first to share!</p>';
+                }
+            } catch (error) {
+                console.error('Error loading timeline posts:', error);
+                document.getElementById('timeline-posts').innerHTML = '<p class="text-center text-red-500 py-8">Error loading posts</p>';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('timeline-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('/api/timeline_post', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    // Clear form
+                    this.reset();
+                    // Reload posts to show the new one
+                    await loadTimelinePosts();
+                } else {
+                    alert('Error creating timeline post');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error creating timeline post');
+            }
+        });
+
+        // Load posts when content loads
+        loadTimelinePosts();
+    </script>
+    """
+
+
 @app.route("/api/timeline_post", methods=["POST"])
 def post_time_line_post():
     name = request.form["name"]
