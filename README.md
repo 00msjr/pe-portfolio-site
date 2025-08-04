@@ -1,79 +1,145 @@
-# Production Engineering - Week 1 - Portfolio Site
+# Portfolio Site - MLH Production Engineering Fellowship
 
-Welcome to the MLH Fellowship! During Week 1, you'll be using Flask to build a portfolio site. This site will be the foundation for activities we do in future weeks so spend time this week making it your own and reflect your personality!
+A full-stack portfolio website built with Flask, featuring dynamic content management, database integration, and production deployment with Docker and Nginx.
 
-## Tasks
+## 🚀 Live Site
 
-Once you've got your portfolio downloaded and running using the instructions below, you should attempt to complete the following tasks.
+**Production URL:** [https://michaelsousa.duckdns.org](https://michaelsousa.duckdns.org)
 
-For each of these tasks, you should create an [Issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues) and work on them in a new [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches). When the task has been completed, you should open a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) and get another fellow in your pod to give you feedback before merging it in.
+## ✨ Features
 
-*Note: Make sure to include a link to the Issue you're progressing on inside of your Pull Request so your reviewer knows what you're progressing on!*
+### Core Functionality
+- **Dynamic Portfolio Pages**: Home, About, Work Experience, Education, Hobbies
+- **Interactive Timeline**: Community timeline with post creation and viewing
+- **Hobby Detail Pages**: Individual pages for each hobby with images
+- **Responsive Design**: Mobile-friendly interface with dynamic navigation
+- **Google Maps Integration**: Interactive map showing visited locations
 
-### GitHub Tasks
-- [x] Create Issues for each task below
-- [ ] Progress on each task in a new branch
-- [ ] Open a Pull Request when a task is finished to get feedback
+### Technical Implementation
+- **Backend**: Flask web framework with Python
+- **Database**: MySQL/MariaDB with Peewee ORM
+- **Frontend**: HTML5, CSS3, JavaScript with Jinja2 templating
+- **Production Deployment**: Docker containers with Nginx reverse proxy
+- **SSL/HTTPS**: Automatic SSL certificate generation with Let's Encrypt
+- **Testing**: Comprehensive test suite with mocking for CI/CD compatibility
 
-### Portfolio Tasks
-- [ ] Add a photo of yourself to the website
-- [ ] Add an "About youself" section to the website.
-- [ ] Add your previous work experiences
-- [ ] Add your hobbies (including images)
-- [ ] Add your current/previous education
-- [ ] Add a map of all the cool locations/countries you visited
+### DevOps & Infrastructure
+- **Containerization**: Multi-container Docker setup (Flask app, MySQL, Nginx)
+- **Reverse Proxy**: Nginx for load balancing and SSL termination
+- **Automated Deployment**: Shell scripts for continuous deployment
+- **Environment Management**: Separate development and production configurations
 
-### Flask Tasks
-- [ ] Get your Flask app running locally on your machine using the instructions below.
-- [ ] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
-- [ ] Create a new page to display hobbies.
-- [ ] Add a menu bar that dynamically displays other pages in the app
+## 🛠️ Quick Start
 
+### Local Development
 
-## Getting Started
+1. **Clone and setup**
+   ```bash
+   git clone <repository-url>
+   cd pe-portfolio-site
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-You need to do all your progress here.
+2. **Configure environment**
+   ```bash
+   cp example.env .env
+   # Edit .env with your configuration
+   ```
 
-## Installation
+3. **Run development server**
+   ```bash
+   export FLASK_ENV=development
+   flask run
+   ```
 
-Make sure you have python3 and pip installed
+   Visit `http://localhost:5000`
 
-Create and activate virtual environment using virtualenv
+### Production Deployment
+
+1. **Deploy to VPS**
+   ```bash
+   ./redeploy-site.sh
+   ```
+
+2. **Verify deployment**
+   ```bash
+   docker ps  # Check all containers are running
+   ```
+
+## 🧪 Testing
+
+Run the comprehensive test suite:
+
 ```bash
-$ python -m venv python3-virtualenv
-$ source python3-virtualenv/bin/activate
+./run_tests.sh
 ```
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dependencies!
+Tests include:
+- Route functionality testing
+- Database operations testing
+- API endpoint validation
+- Mock-based testing for CI/CD environments
 
-```bash
-pip install -r requirements.txt
+## 📁 Project Structure
+
+```
+pe-portfolio-site/
+├── app/                    # Flask application
+│   ├── __init__.py        # App factory and routes
+│   ├── static/            # CSS, JS, images
+│   └── templates/         # Jinja2 HTML templates
+├── tests/                 # Test suite
+├── user_conf.d/           # Nginx configuration
+├── docker-compose.prod.yml # Production Docker setup
+├── Dockerfile             # Flask app container
+├── requirements.txt       # Python dependencies
+└── redeploy-site.sh       # Deployment script
 ```
 
-## Usage
+## 🔧 Configuration
 
-Create a .env file using the example.env template (make a copy using the variables inside of the template)
+### Environment Variables
+- `MYSQL_HOST`: Database host (localhost for dev, mysql for production)
+- `MYSQL_USER`: Database username
+- `MYSQL_PASSWORD`: Database password
+- `MYSQL_DATABASE`: Database name
+- `GOOGLE_MAPS_API_KEY`: Google Maps API key for location features
 
-Start flask development server
-```bash
-$ export FLASK_ENV=development
-$ flask run
-```
+### Docker Services
+- **myportfolio**: Flask application container
+- **mysql**: MariaDB database container
+- **nginx**: Reverse proxy with SSL termination
 
-You should get a response like this in the terminal:
-```
-❯ flask run
- * Environment: development
- * Debug mode: on
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-```
+## 🚀 Future Enhancements
 
-You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
+- [ ] User authentication and authorization
+- [ ] Admin dashboard for content management
+- [ ] Blog functionality with rich text editor
+- [ ] Contact form with email integration
+- [ ] Performance monitoring and analytics
+- [ ] CDN integration for static assets
+- [ ] Multi-language support
+- [ ] API documentation with Swagger
+- [ ] Automated backups and disaster recovery
 
-*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. We'll go through how to host it in the cloud in the next few weeks!* 
+## 🤝 Contributing
 
-## Contributing
+1. Create an issue for new features or bugs
+2. Fork the repository
+3. Create a feature branch (`git checkout -b feature/amazing-feature`)
+4. Make your changes and add tests
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## 📄 License
 
-Please make sure to update tests as appropriate.
+This project is part of the MLH Production Engineering Fellowship program.
+
+## 🔗 Links
+
+- **Live Site**: [https://michaelsousa.duckdns.org](https://michaelsousa.duckdns.org)
+- **Timeline Page**: [https://michaelsousa.duckdns.org/content/timeline](https://michaelsousa.duckdns.org/content/timeline)
+- **Repository**: [GitHub](https://github.com/00msjr/pe-portfolio-site)
