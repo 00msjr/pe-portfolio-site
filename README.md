@@ -2,11 +2,11 @@
 
 A full-stack portfolio website built with Flask, featuring dynamic content management, database integration, and production deployment with Docker and Nginx.
 
-## 🚀 Live Site
+## Live Site
 
 **Production URL:** [https://michaelsousa.duckdns.org](https://michaelsousa.duckdns.org)
 
-## ✨ Features
+## Features
 
 ### Core Functionality
 - **Dynamic Portfolio Pages**: Home, About, Work Experience, Education, Hobbies
@@ -29,7 +29,7 @@ A full-stack portfolio website built with Flask, featuring dynamic content manag
 - **Automated Deployment**: Shell scripts for continuous deployment
 - **Environment Management**: Separate development and production configurations
 
-## 🛠️ Quick Start
+## Quick Start
 
 ### Local Development
 
@@ -68,7 +68,7 @@ A full-stack portfolio website built with Flask, featuring dynamic content manag
    docker ps  # Check all containers are running
    ```
 
-## 🧪 Testing
+## Testing
 
 Run the comprehensive test suite:
 
@@ -82,7 +82,7 @@ Tests include:
 - API endpoint validation
 - Mock-based testing for CI/CD environments
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 pe-portfolio-site/
@@ -98,7 +98,7 @@ pe-portfolio-site/
 └── redeploy-site.sh       # Deployment script
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 - `MYSQL_HOST`: Database host (localhost for dev, mysql for production)
@@ -112,19 +112,22 @@ pe-portfolio-site/
 - **mysql**: MariaDB database container
 - **nginx**: Reverse proxy with SSL termination
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
+- [ ] GitHub Actions for CI/CD pipeline
+- [ ] Monitoring and alerting system
+- [ ] Troubleshooting and debugging tools
 - [ ] User authentication and authorization
 - [ ] Admin dashboard for content management
 - [ ] Blog functionality with rich text editor
 - [ ] Contact form with email integration
-- [ ] Performance monitoring and analytics
+- [ ] Performance analytics and optimization
 - [ ] CDN integration for static assets
 - [ ] Multi-language support
 - [ ] API documentation with Swagger
 - [ ] Automated backups and disaster recovery
 
-## 🤝 Contributing
+## Contributing
 
 1. Create an issue for new features or bugs
 2. Fork the repository
@@ -134,11 +137,11 @@ pe-portfolio-site/
 6. Push to the branch (`git push origin feature/amazing-feature`)
 7. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is part of the MLH Production Engineering Fellowship program.
 
-## 🔗 Links
+## Links
 
 - **Live Site**: [https://michaelsousa.duckdns.org](https://michaelsousa.duckdns.org)
 - **Timeline Page**: [https://michaelsousa.duckdns.org/content/timeline](https://michaelsousa.duckdns.org/content/timeline)
